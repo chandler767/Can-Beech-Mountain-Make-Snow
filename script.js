@@ -93,25 +93,6 @@ function generateBulletPointNotes(daily, index, night) {
         notesList.appendChild(excellentNote);
     }
 
-    // Check precipitation probability for the next 3 days
-    for (let i = index; i < index + 3 && i < daily.precipitation_probability_max.length; i++) {
-        if (daily.precipitation_probability_max[i] > 60) {
-            const precipitationNote = document.createElement('li');
-            precipitationNote.textContent = "Precipitation in the next few days may affect snowmaking.";
-            notesList.appendChild(precipitationNote);
-            break;
-        }
-    }
-
-    // Check temperature for the next 5 days
-    for (let i = index; i < index + 5 && i < daily.temperature_2m_max.length; i++) {
-        if (daily.temperature_2m_max[i] > 45) {
-            const temperatureNote = document.createElement('li');
-            temperatureNote.textContent = "Warm temperatures in the next few days may affect snowmaking.";
-            notesList.appendChild(temperatureNote);
-            break;
-        }
-    }
 
     if ((month === 8 && day >= 1) || (month === 12 && day <= 15) || (month > 8 && month < 12)) {
         noteItem.textContent = "Early season conditions may limit snowmaking opportunities.";
@@ -122,7 +103,26 @@ function generateBulletPointNotes(daily, index, night) {
         notesList.appendChild(noteItem);
     }
 
-    if (wetBulb < goodThreshold) {
+    if (wetBulb < goodThreshold) { 
+        // Check precipitation probability for the next 3 days
+        for (let i = index + 1; i < index + 4 && i < daily.precipitation_probability_max.length; i++) {
+            if (daily.precipitation_probability_max[i] >= 50 && daily.temperature_2m_max[i] >= 32) {
+                const precipitationNote = document.createElement('li');
+                precipitationNote.textContent = "Rain in the next few days may affect snowmaking decisions.";
+                notesList.appendChild(precipitationNote);
+                break;
+            }
+        }
+
+        // Check temperature for the next 5 days
+        for (let i = index+1; i < index + 6 && i < daily.temperature_2m_max.length; i++) {
+            if (daily.temperature_2m_max[i] > 45) {
+                const temperatureNote = document.createElement('li');
+                temperatureNote.textContent = "Warm temperatures in the next few days may affect snowmaking decisions.";
+                notesList.appendChild(temperatureNote);
+                break;
+            }
+        }
         const excellentNote = document.createElement('li');
         excellentNote.textContent = "Resort conditions may vary. The decision to make snow is decided by the resort and they may not be making snow even if conditions allow.";
         notesList.appendChild(excellentNote);
