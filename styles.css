@@ -1,0 +1,357 @@
+/* Base styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: linear-gradient(to bottom, #a2c9ff, #ffffff) no-repeat fixed;
+    color: #333;
+}
+
+#app {
+    max-width: 600px;
+    margin: auto;
+    padding: 1em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+}
+
+/* Winter theme */
+header h1 {
+    text-align: center;
+    color: #29ABE2;
+}
+
+.view-switch {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.tabs {
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.tab {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.tab:hover {
+    background-color: #ddd;
+}
+
+.tab.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.tab:not(:last-child) {
+    border-right: 1px solid #ccc;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+.location-input {
+    position: relative;
+    display: flex;
+    width: 100%;
+    gap: 0.5em;
+}
+
+#locationInput, #locationBtn, #submitBtn {
+    padding: 0.6em;
+    border-radius: 5px;
+    border: 1px solid #0a5396;
+}
+
+#locationInput {
+    width: 100%;
+}
+
+#suggestions {
+    list-style: none;
+    padding: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 150px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid #ddd;
+    z-index: 9999;
+}
+
+#suggestions li {
+    padding: 0.5em;
+    cursor: pointer;
+}
+
+#suggestions li:hover {
+    background-color: #f0f0f0;
+}
+
+.unit-switch {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.unit-switch label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #0a5396;
+}
+
+.unit-switch input {
+    appearance: none;
+    width: 40px;
+    height: 20px;
+    background: #ddd;
+    border-radius: 20px;
+    position: relative;
+    outline: none;
+    margin-right: 0.5em;
+}
+
+.unit-switch input:checked {
+    background: #4caf50;
+}
+
+.unit-switch input::before {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.2s;
+}
+
+.unit-switch input:checked::before {
+    transform: translateX(20px);
+}
+
+#footer {
+    text-align: center;
+}
+
+/* Snowflake container and styling */
+#snowflakeContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.snowflake {
+    position: absolute;
+    top: -50px;
+    animation: fall linear infinite;
+}
+
+.snowflake-inner {
+    width: 100%;
+    height: 100%;
+    background-image: url('snowflake.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    animation: sway 3s ease-in-out infinite, rotate 6s linear infinite;
+}
+
+@keyframes sway {
+    0%, 100% {
+        transform: translateX(-10px);
+    }
+    50% {
+        transform: translateX(10px);
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0.5;
+    }
+}
+
+.snowflake.size-small .snowflake-inner {
+    width: 15px;
+    height: 15px;
+}
+
+.snowflake.size-medium .snowflake-inner {
+    width: 20px;
+    height: 20px;
+}
+
+.snowflake.size-large .snowflake-inner {
+    width: 25px;
+    height: 25px;
+}
+
+.snowflake.speed-slow {
+    animation-duration: 12s;
+}
+
+.snowflake.speed-medium {
+    animation-duration: 10s;
+}
+
+.snowflake.speed-fast {
+    animation-duration: 8s;
+}
+
+.snowflake.delay-0 {
+    animation-delay: 0s;
+}
+
+.snowflake.delay-1 {
+    animation-delay: 1s;
+}
+
+.snowflake.delay-2 {
+    animation-delay: 2s;
+}
+
+.snowflake.delay-3 {
+    animation-delay: 3s;
+}
+
+.snowflake.delay-4 {
+    animation-delay: 4s;
+}
+
+.snowflake.delay-5 {
+    animation-delay: 5s;
+}
+
+/* Error message banner */
+.error-message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #d9534f;
+    color: white;
+    text-align: center;
+    padding: 1em;
+    font-weight: bold;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    animation: slideDown 0.5s ease;
+}
+
+@keyframes slideDown {
+    from {
+        top: -50px;
+    }
+    to {
+        top: 0;
+    }
+}
+
+/* Card styling for sections */
+.card {
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid #ddd;
+    padding: 1em;
+    border-radius: 8px;
+    margin: 1em 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#snowQualityGauge {
+    text-align: center;
+    margin-top: 1em;
+    color: #0a5396;
+}
+
+#snowIndicator {
+    font-size: 2em;
+    color: lightgray;
+}
+
+.light-blue {
+    background-color: #add8e6;
+}
+
+.dark-blue {
+    background-color: #00888b;
+}
+
+.red {
+    background-color: #ffcccd;
+}
+
+/* Gauge styling */
+.gauge {
+    text-align: center;
+    margin-top: 1em;
+}
+
+.circular-gauge {
+    transform: rotate(-90deg);
+}
+
+.gauge-bg {
+    fill: none;
+    stroke: #e6e6e6;
+    stroke-width: 3;
+}
+
+.gauge-value {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+    transition: stroke 0.3s, stroke-dasharray 0.3s;
+}
+
+.gauge-text {
+    font-size: 0.6em;
+    fill: #333;
+}
+
+.too-warm {
+    stroke: #ff6347;
+}
+
+.good {
+    stroke: #ffd700;
+}
+
+.excellent {
+    stroke: #4caf50;
+}
